@@ -14,8 +14,8 @@ def convert_json(file):
 def index():
     if request.method == "POST":
         user_address = request.form["address"]
-        # if not Web3.isAddress(user_address):
-        #   exit program or display error page
+        if not Web3.isAddress(user_address):
+            return redirect("/")
         user_address = Web3.toChecksumAddress(user_address)
         return redirect(url_for("search", user_address=user_address))
     else:
@@ -24,14 +24,14 @@ def index():
 @app.route("/<user_address>")
 def search(user_address):
     web3 = Web3(Web3.HTTPProvider(PROVIDER))
-    # if not web3.isConnected():
-        # exit program or display error page
+    if not web3.isConnected():
+        return redirect("/")
     va_address = "0x1eEC5Ed724aC0cADDa528550DD5136cDFd317Db7"
     va_abi = convert_json("Vaults.json")
     va_contract = web3.eth.contract(address=va_address, abi=va_abi)
     nb_vaults = va_contract.functions.nbVaults().call()
-    # if nb_vaults == 0:
-        # exit program or display error page
+    if nb_vaults == 0:
+        return redirect("/")
     vaults = []
     for i in range(nb_vaults):
         vault = va_contract.functions.vaults(i).call()
