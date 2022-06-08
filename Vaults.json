@@ -1,0 +1,218 @@
+[
+{
+  "anonymous": false,
+  "inputs": [
+	{
+	  "indexed": false,
+	  "name": "index",
+	  "type": "uint256"
+	},
+	{
+	  "indexed": false,
+	  "name": "token",
+	  "type": "address"
+	},
+	{
+	  "indexed": false,
+	  "name": "amount",
+	  "type": "uint256"
+	},
+	{
+	  "indexed": false,
+	  "name": "owner",
+	  "type": "address"
+	}
+  ],
+  "name": "Created",
+  "type": "event"
+},
+{
+  "anonymous": false,
+  "inputs": [
+	{
+	  "indexed": false,
+	  "name": "index",
+	  "type": "uint256"
+	},
+	{
+	  "indexed": false,
+	  "name": "signer",
+	  "type": "address"
+	}
+  ],
+  "name": "Signed",
+  "type": "event"
+},
+{
+  "anonymous": false,
+  "inputs": [
+	{
+	  "indexed": false,
+	  "name": "index",
+	  "type": "uint256"
+	}
+  ],
+  "name": "Withdrawn",
+  "type": "event"
+},
+{
+  "anonymous": false,
+  "inputs": [
+	{
+	  "indexed": false,
+	  "name": "index",
+	  "type": "uint256"
+	},
+	{
+	  "indexed": false,
+	  "name": "time",
+	  "type": "uint256"
+	}
+  ],
+  "name": "EmergencyCalled",
+  "type": "event"
+},
+{
+  "anonymous": false,
+  "inputs": [
+	{
+	  "indexed": false,
+	  "name": "index",
+	  "type": "uint256"
+	}
+  ],
+  "name": "EmergencyWithdrawn",
+  "type": "event"
+},
+{
+  "inputs": [
+	{
+	  "name": "token",
+	  "type": "address"
+	},
+	{
+	  "name": "amount",
+	  "type": "uint256"
+	},
+	{
+	  "name": "firstSigner",
+	  "type": "address"
+	},
+	{
+	  "name": "secondSigner",
+	  "type": "address"
+	}
+  ],
+  "name": "createVault",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+},
+{
+  "inputs": [
+	{
+	  "name": "index",
+	  "type": "uint256"
+	}
+  ],
+  "name": "signWithdrawal",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+},
+{
+  "inputs": [
+	{
+	  "name": "index",
+	  "type": "uint256"
+	}
+  ],
+  "name": "withdrawFromVault",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+},
+{
+  "inputs": [
+	{
+	  "name": "index",
+	  "type": "uint256"
+	}
+  ],
+  "name": "callEmergency",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+},
+{
+  "inputs": [
+	{
+	  "name": "index",
+	  "type": "uint256"
+	}
+  ],
+  "name": "emergencyWithdraw",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+},
+{
+  "inputs": [
+	{
+	  "name": "arg0",
+	  "type": "uint256"
+	}
+  ],
+  "name": "vaults",
+  "outputs": [
+	{
+	  "components": [
+		{
+		  "name": "token",
+		  "type": "address"
+		},
+		{
+		  "name": "amount",
+		  "type": "uint256"
+		},
+		{
+		  "name": "owner",
+		  "type": "address"
+		},
+		{
+		  "name": "signers",
+		  "type": "address[2]"
+		},
+		{
+		  "name": "isSigned",
+		  "type": "bool[2]"
+		},
+		{
+		  "name": "isActive",
+		  "type": "bool"
+		},
+		{
+		  "name": "time",
+		  "type": "uint256"
+		}
+	  ],
+	  "name": "",
+	  "type": "tuple"
+	}
+  ],
+  "stateMutability": "view",
+  "type": "function"
+},
+{
+  "inputs": [],
+  "name": "nbVaults",
+  "outputs": [
+	{
+	  "name": "",
+	  "type": "uint256"
+	}
+  ],
+  "stateMutability": "view",
+  "type": "function"
+}
+]
