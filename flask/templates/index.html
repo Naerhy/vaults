@@ -1,14 +1,10 @@
 {% extends "layout.html" %}
 
-{% block head %}
-<title>Index</title>
-{% endblock %}
-
 {% block body %}
-<h1>Index</h1>
-<form action="" method="post">
-	<label for="address">Enter wallet address</label>
-	<input type="text" name="address" id="address" required>
-	<button type="submit">Check vaults</button>
-</form>
+	<h2>Find your vaults</h2>
+	<form action="" method="post">
+		<label for="address">Input a valid address:</label>
+		<input type="text" name="address" id="address" required>
+		<button type="submit">Confirm</button>
+	</form>
 {% endblock %}
