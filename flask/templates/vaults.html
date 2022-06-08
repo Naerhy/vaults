@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<title>Vaults</title>
+{% endblock %}
+
+{% block body %}
+<h1>Vaults</h1>
+{% for vault in vaults %}
+	<table>
+		<tr>
+			<th>Token</th>
+			<td>{{ vault[0] }}</td>
+		</tr>
+		<tr>
+			<th>Amount</th>
+			<td>{{ vault[1] }}</td>
+		</tr>
+		<tr>
+			<th>Owner</th>
+			<td>{{ vault[2] }}</td>
+		</tr>
+		<tr>
+			<th>Signers</th>
+			<td>{{ vault[3][0] }}, {{ vault[3][1] }}</td>
+		</tr>
+		<tr>
+			<th>Is Signed</th>
+			<td>{{ vault[4][0] }}, {{ vault[4][1] }}</td>
+		</tr>
+		<tr>
+			<th>Is Active</th>
+			<td>{{ vault[5] }}</td>
+		</tr>
+		<tr>
+			<th>Timestamp</th>
+			<td>{{ vault[6] }}</td>
+		</tr>
+	</table>
+{% endfor %}
+<div>
+	<a href="/">Return to index</a>
+</div>
+{% endblock %}

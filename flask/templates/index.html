@@ -11,40 +11,4 @@
 	<input type="text" name="address" id="address" required>
 	<button type="submit">Check vaults</button>
 </form>
-{% if vaults is none %}
-	<p>There is no vaults to display!</p>
-{% else %}
-	{% for vault in vaults %}
-		<table>
-			<tr>
-				<th>Token</th>
-				<td>{{ vault[0] }}</td>
-			</tr>
-			<tr>
-				<th>Amount</th>
-				<td>{{ vault[1] }}</td>
-			</tr>
-			<tr>
-				<th>Owner</th>
-				<td>{{ vault[2] }}</td>
-			</tr>
-			<tr>
-				<th>Signers</th>
-				<td>{{ vault[3][0] }}, {{ vault[3][1] }}</td>
-			</tr>
-			<tr>
-				<th>Is Signed</th>
-				<td>{{ vault[4][0] }}, {{ vault[4][1] }}</td>
-			</tr>
-			<tr>
-				<th>Is Active</th>
-				<td>{{ vault[5] }}</td>
-			</tr>
-			<tr>
-				<th>Timestamp</th>
-				<td>{{ vault[6] }}</td>
-			</tr>
-		</table>
-	{% endfor %}
-{% endif %}
 {% endblock %}
