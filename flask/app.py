@@ -10,6 +10,14 @@ def convert_json(file):
     with open(file) as f:
         return json.load(f)
 
+def format_input(vaults, web3):
+    erc20_abi = convert_json("ERC20.json")
+    for vault in vaults:
+        erc20_contract = web3.eth.contract(address=vault[0], abi=erc20_abi)
+        vault[0] = erc20_contract.functions.symbol().call()
+        vault[1] = float(vault[1] / 10 ** erc20_contract.functions.decimals().call())
+    return vaults
+
 @app.route("/", methods=["POST", "GET"])
 def index():
     if request.method == "POST":
@@ -36,7 +44,9 @@ def search(user_address):
     for i in range(nb_vaults):
         vault = va_contract.functions.vaults(i).call()
         if vault[2] == user_address:
-            vaults.append(vault)
+            # converting tuple to list as we cannot modify tuple in format_input
+            vaults.append(list(vault))
+    format_input(vaults, web3)
     return render_template("vaults.html", vaults=vaults)
 
 if __name__ == "__main__":
