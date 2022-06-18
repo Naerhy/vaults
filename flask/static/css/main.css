@@ -13,7 +13,6 @@
 }
 
 html, body {
-	height: 100%;
 	margin: 0;
 }
 
@@ -23,6 +22,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	min-height: 100vh;
 }
 
 main {
@@ -32,6 +32,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
+	margin: 2rem 0rem;
 	padding: 2.5rem;
 }
 
@@ -82,4 +83,8 @@ button {
 
 #index {
 	align-self: flex-start;
+}
+
+.vault-text-center {
+	text-align: center;
 }
