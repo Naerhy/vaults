@@ -1,17 +1,18 @@
 {% extends "layout.html" %}
 
 {% block body %}
-	{% for key, vault in vaults.items() %}
+	{% for vault in vaults %}
 		<div class="vaults">
-			<p id="index">#{{ key }}</p>
+			<p id="index">#{{ vault[7] }}</p>
+			<p>{{ vault[8] }}</p>
 			<p>{{ vault[0] }}</p>
 			<p>{{ vault[1] }}</p>
 			<div>
-				<p>owner:</p>
+				<p class="vault-text-center">Owner:</p>
 				<p>{{ vault[2] }}</p>
 			</div>
 			<div>
-				<p>signers:</p>
+				<p class="vault-text-center">Signers:</p>
 				<p>{{ vault[3][0] }}</p>
 				<p>{{ vault[3][1] }}</p>
 			</div>
