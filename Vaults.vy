@@ -22,24 +22,24 @@ struct Vault:
 # add indexed keyword
 
 event Created:
-	index: uint256
+	index: indexed(uint256)
 	token: address
 	amount: uint256
-	owner: address
+	owner: indexed(address)
 
 event Signed:
-	index: uint256
+	index: indexed(uint256)
 	signer: address
 
 event Withdrawn:
-	index: uint256
+	index: indexed(uint256)
 
 event EmergencyCalled:
-	index: uint256
+	index: indexed(uint256)
 	time: uint256
 
 event EmergencyWithdrawn:
-	index: uint256
+	index: indexed(uint256)
 
 ###################
 # STATE VARIABLES #
@@ -61,6 +61,7 @@ def createVault(token: address, amount: uint256, firstSigner: address,
 	assert firstSigner != ZERO_ADDRESS and secondSigner != ZERO_ADDRESS
 	assert msg.sender != firstSigner and msg.sender != secondSigner
 	assert firstSigner != secondSigner
+	assert amount > 0
 	self.vaults[self.nbVaults] = Vault({
 		token: token,
 		amount: amount,
@@ -70,6 +71,7 @@ def createVault(token: address, amount: uint256, firstSigner: address,
 		isActive: True,
 		time: 0})
 	self.nbVaults += 1
+	# user has to approve token transfer from contract first
 	ERC20(token).transferFrom(msg.sender, self, amount)
 	log Created(self.nbVaults - 1, token, amount, msg.sender)
 	# return value [?]
@@ -95,8 +97,7 @@ def withdrawFromVault(index: uint256):
 	assert msg.sender == self.vaults[index].owner
 	assert self.vaults[index].isSigned[0] and self.vaults[index].isSigned[1]
 	assert self.vaults[index].isActive
-	ERC20(self.vaults[index].token).transfer(msg.sender,
-			self.vaults[index].amount)
+	ERC20(self.vaults[index].token).transfer(msg.sender, self.vaults[index].amount)
 	self.vaults[index].isActive = False
 	log Withdrawn(index)
 	# return value [?]
@@ -117,10 +118,8 @@ def emergencyWithdraw(index: uint256):
 	assert index < self.nbVaults
 	assert msg.sender == self.vaults[index].owner
 	assert self.vaults[index].isActive
-	assert self.vaults[index].time > 0 and \
-			self.vaults[index].time < block.timestamp
-	ERC20(self.vaults[index].token).transfer(msg.sender,
-			self.vaults[index].amount)
+	assert self.vaults[index].time > 0 and self.vaults[index].time < block.timestamp
+	ERC20(self.vaults[index].token).transfer(msg.sender, self.vaults[index].amount)
 	self.vaults[index].isActive = False
 	log EmergencyWithdrawn(index)
 	# return value [?]
